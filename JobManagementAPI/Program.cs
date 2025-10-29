@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // your React app
+        policy.WithOrigins("https://job-admin-portal-frontend.vercel.app/") // your React app
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -44,11 +44,14 @@ if (app.Environment.IsDevelopment())
 // Global exception middleware (must be before other handlers)
 app.UseGlobalExceptionHandler();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 // ? Apply CORS policy here
 app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 app.MapControllers();
+
+// Add this test endpoint
+app.MapGet("/", () => "✅ Job Admin API is running successfully!");
 
 app.Run();
