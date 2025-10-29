@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("https://job-admin-portal-frontend.vercel.app/") // your React app
+        policy.WithOrigins("https://job-admin-portal-project.vercel.app") // your React app
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
