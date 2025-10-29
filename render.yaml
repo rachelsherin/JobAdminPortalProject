@@ -2,5 +2,6 @@ services:
   - type: web
     name: jobadmin-backend
     env: docker
-    rootDir: JobManagementAPI
     plan: free
+    rootDir: JobManagementAPI
+    dockerfilePath: ./Dockerfile

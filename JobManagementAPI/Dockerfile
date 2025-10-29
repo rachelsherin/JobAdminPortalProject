@@ -1,19 +1,16 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# copy csproj and restore separately for layer caching
-COPY *.sln ./
-COPY JobManagementAPI/*.csproj ./JobManagementAPI/
+# Copy source and restore
+COPY . .
 RUN dotnet restore
 
-# copy all source and publish
-COPY . .
-WORKDIR /src/JobManagementAPI
-RUN dotnet publish -c Release -o /app/out
+# Publish
+RUN dotnet publish -c Release -o out
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+# Runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "JobManagementAPI.dll"]
