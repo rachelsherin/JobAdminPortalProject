@@ -1,7 +1,7 @@
 services:
   - type: web
     name: jobadmin-backend
-    env: docker
+    runtime: dotnet
     plan: free
     rootDir: JobManagementAPI
     buildCommand: dotnet publish -c Release -o out
